@@ -1,22 +1,21 @@
 import React, { Suspense, lazy } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate, Link } from "react-router-dom";
+import "./App.css";
 
-const Home = lazy(() => import("../components/Home/Home"));
-const Movies = lazy(() => import("../components/Movies/Movies"));
-const MovieDetails = lazy(
-  () => import("../components/MovieDetails/MovieDetails"),
-);
-const Cast = lazy(() => import("../components/Cast/Cast"));
-const Reviews = lazy(() => import("../components/Reviews/Reviews"));
+const Home = lazy(() => import("./Home.jsx"));
+const Movies = lazy(() => import("./Movies.jsx"));
+const MovieDetails = lazy(() => import("./MovieDetails.jsx"));
+const Cast = lazy(() => import("./Cast.jsx"));
+const Reviews = lazy(() => import("./Reviews.jsx"));
+const NotFound = lazy(() => import("./NotFound.jsx"));
 
 function App() {
   return (
-    <Router>
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/movies">Movies</Link>
+      </nav>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -28,7 +27,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
-    </Router>
+    </div>
   );
 }
 
