@@ -1,44 +1,58 @@
 import axios from "axios";
 
-const API_KEY = "4825590330745f1ec4328dc50e97062f";
 const BASE_URL = "https://api.themoviedb.org/3";
+const API_TOKEN = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ODI1NTkwMzMwNzQ1ZjFlYzQzMjhkYzUwZTk3MDYyZiIsInN1YiI6IjY2M2JhZDU3N2ZlYjQwYTBmOGJkODNkMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9gA2skQkLIasuNZeeqBq5ytz8AEmgH4dcZ8LJagXkPA";
+
+const headers = {
+  accept: 'application/json',
+  Authorization: API_TOKEN,
+};
 
 export const fetchTrendingMovies = () => {
-  return axios.get(`${BASE_URL}/trending/all/day?language=en-US`, {
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
+  return axios.get(`${BASE_URL}/trending/all/day`, {
+    headers,
+    params: {
+      language: 'en-US',
     },
   });
 };
 
 export const searchMovies = (query) => {
-  return axios.get(`${BASE_URL}/search/movie?include_adult=false&language=en-US&page=1&query=${query}`, {
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
+  return axios.get(`${BASE_URL}/search/movie`, {
+    headers,
+    params: {
+      include_adult: 'false',
+      language: 'en-US',
+      page: '1',
+      query,
     },
   });
 };
 
 export const fetchMovieDetails = (movieId) => {
-  return axios.get(`${BASE_URL}/movie/${movieId}?language=en-US`, {
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
+  return axios.get(`${BASE_URL}/movie/${movieId}`, {
+    headers,
+    params: {
+      language: 'en-US',
     },
   });
 };
 
 export const fetchMovieCast = (movieId) => {
-  return axios.get(`${BASE_URL}/movie/${movieId}/credits?language=en-US`, {
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
+  return axios.get(`${BASE_URL}/movie/${movieId}/credits`, {
+    headers,
+    params: {
+      language: 'en-US',
     },
   });
 };
 
 export const fetchMovieReviews = (movieId) => {
-  return axios.get(`${BASE_URL}/movie/${movieId}/reviews?language=en-US&page=1`, {
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
+  return axios.get(`${BASE_URL}/movie/${movieId}/reviews`, {
+    headers,
+    params: {
+      language: 'en-US',
+      page: '1',
     },
   });
 };
