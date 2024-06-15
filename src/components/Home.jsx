@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchTrendingMovies } from "../api";
 import "./Home.css";
 
@@ -17,7 +18,7 @@ function Home() {
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
-            <a href={`/movies/${movie.id}`}>{movie.title || movie.name}</a>
+            <Link to={`/movies/${movie.id}`}>{movie.title || movie.name}</Link>
           </li>
         ))}
       </ul>
