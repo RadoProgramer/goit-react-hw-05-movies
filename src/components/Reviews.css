@@ -2,6 +2,10 @@
   padding: 20px;
 }
 
+.reviews button {
+  margin-bottom: 20px;
+}
+
 .reviews h2 {
   font-size: 1.5em;
   color: #282c34;

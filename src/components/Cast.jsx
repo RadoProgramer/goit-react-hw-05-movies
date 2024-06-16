@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { fetchMovieCast } from "../api";
 import "./Cast.css";
 
 function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     fetchMovieCast(movieId)
@@ -13,8 +15,22 @@ function Cast() {
       .catch((error) => console.error(error));
   }, [movieId]);
 
+  const handleGoBack = () => {
+    if (location.state?.from) {
+      navigate(location.state.from.pathname, {
+        state: {
+          query: location.state.from.query,
+          movies: location.state.from.movies,
+        },
+      });
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <div className="cast">
+      <button onClick={handleGoBack}>Go back</button>
       <h2>Cast</h2>
       <ul>
         {cast.map((member) => (
