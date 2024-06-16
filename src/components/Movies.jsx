@@ -9,8 +9,8 @@ function Movies() {
 
   const handleSearch = () => {
     searchMovies(query)
-      .then(response => setMovies(response.data.results))
-      .catch(error => console.error(error));
+      .then((response) => setMovies(response.data.results))
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -19,11 +19,11 @@ function Movies() {
       <input
         type="text"
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
       />
       <button onClick={handleSearch}>Search</button>
       <ul>
-        {movies.map(movie => (
+        {movies.map((movie) => (
           <li key={movie.id}>
             <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
           </li>

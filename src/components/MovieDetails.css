@@ -24,7 +24,8 @@
   font-size: 1.2em;
 }
 
-.movie-header h2, .movie-header h3 {
+.movie-header h2,
+.movie-header h3 {
   margin-top: 20px;
 }
 

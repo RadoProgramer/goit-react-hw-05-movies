@@ -9,8 +9,8 @@ function Reviews() {
 
   useEffect(() => {
     fetchMovieReviews(movieId)
-      .then(response => setReviews(response.data.results))
-      .catch(error => console.error(error));
+      .then((response) => setReviews(response.data.results))
+      .catch((error) => console.error(error));
   }, [movieId]);
 
   return (
@@ -18,7 +18,7 @@ function Reviews() {
       <h2>Reviews</h2>
       <ul>
         {reviews.length > 0 ? (
-          reviews.map(review => (
+          reviews.map((review) => (
             <li key={review.id}>
               <h3>{review.author}</h3>
               <p>{review.content}</p>

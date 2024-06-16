@@ -8,15 +8,15 @@ function Home() {
 
   useEffect(() => {
     fetchTrendingMovies()
-      .then(response => setMovies(response.data.results))
-      .catch(error => console.error(error));
+      .then((response) => setMovies(response.data.results))
+      .catch((error) => console.error(error));
   }, []);
 
   return (
     <div className="home">
       <h1>Trending today</h1>
       <ul>
-        {movies.map(movie => (
+        {movies.map((movie) => (
           <li key={movie.id}>
             <Link to={`/movies/${movie.id}`}>{movie.title || movie.name}</Link>
           </li>

@@ -23,7 +23,12 @@ body {
   box-sizing: border-box;
 }
 
-.home, .movies, .movie-details, .cast, .reviews, .not-found {
+.home,
+.movies,
+.movie-details,
+.cast,
+.reviews,
+.not-found {
   padding: 20px;
 }
 
