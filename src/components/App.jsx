@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Routes, Route, Navigate, NavLink } from "react-router-dom";
 import "./App.css";
 
 const Home = lazy(() => import("./Home.jsx"));
@@ -13,8 +13,17 @@ function App() {
   return (
     <div>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) => (isActive ? "active" : "")}>
+          Home
+        </NavLink>
+        <NavLink
+          to="/movies"
+          className={({ isActive }) => (isActive ? "active" : "")}>
+          Movies
+        </NavLink>
       </nav>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
