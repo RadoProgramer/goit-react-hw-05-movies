@@ -1,11 +1,20 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { searchMovies } from "../api";
 import "./Movies.css";
 
 function Movies() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.query) {
+      setQuery(location.state.query);
+      setMovies(location.state.movies);
+    }
+  }, [location.state]);
 
   const handleSearch = () => {
     if (query.trim()) {
@@ -34,7 +43,11 @@ function Movies() {
       <ul>
         {movies.map((movie) => (
           <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+            <Link
+              to={`/movies/${movie.id}`}
+              state={{ from: { pathname: "/movies", query, movies } }}>
+              {movie.title}
+            </Link>
           </li>
         ))}
       </ul>

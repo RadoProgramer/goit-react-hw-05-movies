@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Outlet, Link, useNavigate } from "react-router-dom";
+import {
+  useParams,
+  Outlet,
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { fetchMovieDetails } from "../api";
 import "./MovieDetails.css";
 
@@ -7,6 +13,7 @@ function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     fetchMovieDetails(movieId)
@@ -16,9 +23,22 @@ function MovieDetails() {
 
   if (!movie) return <div>Loading...</div>;
 
+  const handleGoBack = () => {
+    if (location.state?.from) {
+      navigate(location.state.from.pathname, {
+        state: {
+          query: location.state.from.query,
+          movies: location.state.from.movies,
+        },
+      });
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <div className="movie-details">
-      <button onClick={() => navigate(-1)}>Go back</button>
+      <button onClick={handleGoBack}>Go back</button>
       <div className="movie-header">
         <img
           src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
