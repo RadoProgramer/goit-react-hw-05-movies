@@ -1,5 +1,11 @@
-import React, { Suspense, lazy } from "react";
-import { Routes, Route, Navigate, NavLink } from "react-router-dom";
+import React, { Suspense, lazy, useEffect } from "react";
+import {
+  Routes,
+  Route,
+  Navigate,
+  NavLink,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
 
 const Home = lazy(() => import("../Home/Home.jsx"));
@@ -10,6 +16,17 @@ const Reviews = lazy(() => import("../Reviews/Reviews.jsx"));
 const NotFound = lazy(() => import("../NotFound/NotFound.jsx"));
 
 function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (
+      !location.pathname.includes("cast") &&
+      !location.pathname.includes("reviews")
+    ) {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
+
   return (
     <div>
       <nav>
