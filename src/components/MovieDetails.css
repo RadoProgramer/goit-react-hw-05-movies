@@ -29,24 +29,29 @@
   margin-top: 20px;
 }
 
-nav {
+.additional-info {
   margin-top: 20px;
 }
 
-nav ul {
+.additional-info h3 {
+  font-size: 1.5em;
+  color: #282c34;
+}
+
+.additional-info ul {
   list-style: none;
   padding: 0;
 }
 
-nav li {
+.additional-info li {
   margin-bottom: 10px;
 }
 
-nav a {
+.additional-info a {
   text-decoration: none;
   color: #007bff;
 }
 
-nav a:hover {
+.additional-info a:hover {
   text-decoration: underline;
 }

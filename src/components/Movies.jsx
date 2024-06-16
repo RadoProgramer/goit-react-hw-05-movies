@@ -8,9 +8,17 @@ function Movies() {
   const [movies, setMovies] = useState([]);
 
   const handleSearch = () => {
-    searchMovies(query)
-      .then((response) => setMovies(response.data.results))
-      .catch((error) => console.error(error));
+    if (query.trim()) {
+      searchMovies(query)
+        .then((response) => setMovies(response.data.results))
+        .catch((error) => console.error(error));
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -20,6 +28,7 @@ function Movies() {
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <button onClick={handleSearch}>Search</button>
       <ul>

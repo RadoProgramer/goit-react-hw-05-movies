@@ -35,7 +35,7 @@ function MovieDetails() {
           <p>{movie.genres.map((genre) => genre.name).join(", ")}</p>
         </div>
       </div>
-      <nav>
+      <div className="additional-info">
         <h3>Additional information</h3>
         <ul>
           <li>
@@ -45,7 +45,7 @@ function MovieDetails() {
             <Link to="reviews">Reviews</Link>
           </li>
         </ul>
-      </nav>
+      </div>
       <Outlet />
     </div>
   );
