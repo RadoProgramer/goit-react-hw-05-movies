@@ -2,12 +2,12 @@ import React, { Suspense, lazy } from "react";
 import { Routes, Route, Navigate, NavLink } from "react-router-dom";
 import "./App.css";
 
-const Home = lazy(() => import("./Home.jsx"));
-const Movies = lazy(() => import("./Movies.jsx"));
-const MovieDetails = lazy(() => import("./MovieDetails.jsx"));
-const Cast = lazy(() => import("./Cast.jsx"));
-const Reviews = lazy(() => import("./Reviews.jsx"));
-const NotFound = lazy(() => import("./NotFound.jsx"));
+const Home = lazy(() => import("../Home/Home.jsx"));
+const Movies = lazy(() => import("../Movies/Movies.jsx"));
+const MovieDetails = lazy(() => import("../MovieDetails/MovieDetails.jsx"));
+const Cast = lazy(() => import("../Cast/Cast.jsx"));
+const Reviews = lazy(() => import("../Reviews/Reviews.jsx"));
+const NotFound = lazy(() => import("../NotFound/NotFound.jsx"));
 
 function App() {
   return (

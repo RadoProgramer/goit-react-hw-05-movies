@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { searchMovies } from "../api";
+import { searchMovies } from "../../api";
 import "./Movies.css";
 
 function Movies() {

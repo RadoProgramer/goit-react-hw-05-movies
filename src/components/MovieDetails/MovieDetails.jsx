@@ -6,7 +6,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import { fetchMovieDetails } from "../api";
+import { fetchMovieDetails } from "../../api";
 import "./MovieDetails.css";
 
 function MovieDetails() {
