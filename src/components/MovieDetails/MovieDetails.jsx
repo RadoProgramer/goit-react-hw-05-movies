@@ -6,22 +6,39 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
+import { Blocks } from "react-loader-spinner";
 import { fetchMovieDetails } from "../../api";
 import "./MovieDetails.css";
 
 function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    fetchMovieDetails(movieId)
-      .then((response) => setMovie(response.data))
-      .catch((error) => console.error(error));
-  }, [movieId]);
+    const timer = setTimeout(() => {
+      if (loading) {
+        setNotFound(true);
+      }
+    }, 5000);
 
-  if (!movie) return <div>Loading...</div>;
+    fetchMovieDetails(movieId)
+      .then((response) => {
+        setMovie(response.data);
+        setLoading(false);
+        clearTimeout(timer);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+        setNotFound(true);
+      });
+
+    return () => clearTimeout(timer);
+  }, [movieId]);
 
   const handleGoBack = () => {
     if (location.state?.from) {
@@ -35,6 +52,31 @@ function MovieDetails() {
       navigate("/");
     }
   };
+
+  if (notFound) {
+    return (
+      <div className="not-found">
+        <h1>The movie not found</h1>
+        <button onClick={handleGoBack}>Go back</button>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <Blocks
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="blocks-loading"
+          wrapperStyle={{}}
+          wrapperClass="blocks-wrapper"
+          visible={true}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="movie-details">
@@ -59,12 +101,18 @@ function MovieDetails() {
         <h3>Additional information</h3>
         <ul>
           <li>
-            <Link to="cast" state={{ from: location.state?.from }}>
+            <Link
+              to="cast"
+              state={{ from: location.state?.from }}
+              preventScrollReset>
               Cast
             </Link>
           </li>
           <li>
-            <Link to="reviews" state={{ from: location.state?.from }}>
+            <Link
+              to="reviews"
+              state={{ from: location.state?.from }}
+              preventScrollReset>
               Reviews
             </Link>
           </li>

@@ -6,6 +6,7 @@ import {
   NavLink,
   useLocation,
 } from "react-router-dom";
+import { Blocks } from "react-loader-spinner";
 import "./App.css";
 
 const Home = lazy(() => import("../Home/Home.jsx"));
@@ -42,7 +43,20 @@ function App() {
           Movies
         </NavLink>
       </nav>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="loader-container">
+            <Blocks
+              height="80"
+              width="80"
+              color="#4fa94d"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              visible={true}
+            />
+          </div>
+        }>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
